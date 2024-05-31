@@ -43,6 +43,8 @@ def main():
                 break
             else:
                 print("Exit should be used as: exit 0")
+        elif command == "pwd":
+            print(os.path.dirname(os.path.realpath(__file__)))
         else:
             folder = binary_exists(path, command)
             if folder:
