@@ -3,6 +3,8 @@ import os
 import subprocess
 
 folders = []
+app_folder = os.path.dirname(os.path.realpath(__file__))
+base_folder = os.sep + os.path.join(*app_folder.split(os.sep)[:-1])
 
 
 def binary_exists(path, binary_name):
@@ -49,7 +51,8 @@ def main():
             if folders:
                 print(folders[-1])
             else:
-                print(os.path.dirname(os.path.realpath(__file__)))
+                os.chdir(base_folder)
+                print(base_folder)
         elif command == "cd":
             folder = rest[0]
             try:
