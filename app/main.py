@@ -48,6 +48,8 @@ def main():
             if folder:
                 process = subprocess.run([command, *rest])
             else:
+                if os.path.isfile(command):
+                    process = subprocess.run([command, *rest])
                 print(f"{input_text}: not found")
         sys.stdout.write("$ ")
         sys.stdout.flush()
