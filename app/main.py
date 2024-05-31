@@ -23,7 +23,7 @@ def main():
                 else:
                     print(f"{arg} not found")
         elif command == "echo":
-            print(rest)
+            print(" ".join(rest))
         elif command == "exit":
             if len(rest) == 1 and rest[0] == "0":
                 break
