@@ -1,9 +1,18 @@
 import sys
+import os
 
+
+def binary_exists(path, binary_name):
+    for folder in path.split(":"):
+        if os.path.isfile(f"{folder}/{binary_name}"):
+            return folder
+    return None
 
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
     #  print("Logs from your program will appear here!")
+    path = os.getenv('PATH')
+
 
     sys.stdout.write("$ ")
     sys.stdout.flush()
@@ -21,7 +30,13 @@ def main():
                 if arg in ["echo", "exit", "type"]:
                     print(f"{arg} is a shell builtin")
                 else:
-                    print(f"{arg} not found")
+                    binary_folder = binary_exists(path, arg)
+                    if binary_folder:
+                        print(f"{arg} is {binary_folder}/{arg}")
+                    else:
+                        print(f"{arg}: command not found".removesuffix("\r"))
+                    #  else:
+                        #  print(f"{arg} not found")
         elif command == "echo":
             print(" ".join(rest))
         elif command == "exit":
