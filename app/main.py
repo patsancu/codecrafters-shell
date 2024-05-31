@@ -23,6 +23,10 @@ def main():
                 exit_code = 2
                 print("No arguments for exit")
             break
+        elif input_text.startswith("echo"):
+            if len(splitted) > 1:
+                args = " ".join(splitted[1:])
+                print(args)
         else:
             print(f"{input_text}: not found")
         sys.stdout.write("$ ")
