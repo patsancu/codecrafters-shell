@@ -10,7 +10,8 @@ def main():
     sys.stdout.flush()
 
     # Wait for user input
-    input()
+    input_text = input()
+    print(f"{input_text}: not found")
 
 
 if __name__ == "__main__":
