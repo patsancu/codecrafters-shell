@@ -50,7 +50,8 @@ def main():
             else:
                 if os.path.isfile(command):
                     process = subprocess.run([command, *rest])
-                print(f"{input_text}: not found")
+                else:
+                    print(f"{input_text}: not found")
         sys.stdout.write("$ ")
         sys.stdout.flush()
     sys.exit(exit_code)
