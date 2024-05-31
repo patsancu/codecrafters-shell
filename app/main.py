@@ -61,6 +61,23 @@ def main():
             else:
                 try:
                     folder = rest[0]
+                    temp_folder = []
+                    if folder.startswith("."):
+                        if folders:
+                            current_folder = folders[-1]
+                        else:
+                            current_folder = base_folder
+                        if folder.startswith(".."):
+                            up = 0
+                            for piece in folder.split(os.sep):
+                                if piece == "..":
+                                    up += 1
+                            folder = os.sep + os.path.join(*current_folder.split(os.sep)[:-up])
+                            pass
+                            # going up
+                        elif folder.startswith("./"):
+                            # current directory
+                            folder = f"{current_folder}/{folder[2:]}"
                     os.chdir(folder)
                     folders.append(folder)
                 except FileNotFoundError:
