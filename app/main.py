@@ -1,5 +1,6 @@
 import sys
 import os
+import subprocess
 
 
 def binary_exists(path, binary_name):
@@ -35,8 +36,6 @@ def main():
                         print(f"{arg} is {binary_folder}/{arg}")
                     else:
                         print(f"{arg}: not found".removesuffix("\r"))
-                    #  else:
-                        #  print(f"{arg} not found")
         elif command == "echo":
             print(" ".join(rest))
         elif command == "exit":
@@ -45,7 +44,11 @@ def main():
             else:
                 print("Exit should be used as: exit 0")
         else:
-            print(f"{input_text}: not found")
+            folder = binary_exists(path, command)
+            if folder:
+                process = subprocess.run([command, *rest])
+            else:
+                print(f"{input_text}: not found")
         sys.stdout.write("$ ")
         sys.stdout.flush()
     sys.exit(exit_code)
