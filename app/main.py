@@ -55,12 +55,16 @@ def main():
                 os.chdir(base_folder)
                 print(base_folder)
         elif command == "cd":
-            folder = rest[0]
-            try:
-                os.chdir(folder)
-                folders.append(folder)
-            except FileNotFoundError:
-                print(f"{folder}: No such file or directory")
+            if len(rest) == 0:
+                os.chdir(base_folder)
+                folders.clear()
+            else:
+                try:
+                    folder = rest[0]
+                    os.chdir(folder)
+                    folders.append(folder)
+                except FileNotFoundError:
+                    print(f"{folder}: No such file or directory")
         else:
             folder = binary_exists(path, command)
             if folder:
