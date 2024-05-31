@@ -34,7 +34,7 @@ def main():
                     if binary_folder:
                         print(f"{arg} is {binary_folder}/{arg}")
                     else:
-                        print(f"{arg}: command not found".removesuffix("\r"))
+                        print(f"{arg}: not found".removesuffix("\r"))
                     #  else:
                         #  print(f"{arg} not found")
         elif command == "echo":
