@@ -2,6 +2,8 @@ import sys
 import os
 import subprocess
 
+folders = []
+
 
 def binary_exists(path, binary_name):
     for folder in path.split(":"):
@@ -44,7 +46,17 @@ def main():
             else:
                 print("Exit should be used as: exit 0")
         elif command == "pwd":
-            print(os.path.dirname(os.path.realpath(__file__)))
+            if folders:
+                print(folders[-1])
+            else:
+                print(os.path.dirname(os.path.realpath(__file__)))
+        elif command == "cd":
+            folder = rest[0]
+            try:
+                os.chdir(folder)
+                folders.append(folder)
+            except FileNotFoundError:
+                print(f"cd: {folder}: No such file or directory ")
         else:
             folder = binary_exists(path, command)
             if folder:
