@@ -5,6 +5,7 @@ import subprocess
 folders = []
 app_folder = os.path.dirname(os.path.realpath(__file__))
 base_folder = os.sep + os.path.join(*app_folder.split(os.sep)[:-1])
+home_folder = os.getenv("HOME")
 
 
 def binary_exists(path, binary_name):
@@ -56,7 +57,7 @@ def main():
                 print(base_folder)
         elif command == "cd":
             if len(rest) == 0:
-                os.chdir(base_folder)
+                os.chdir(home_folder)
                 folders.clear()
             else:
                 try:
@@ -78,6 +79,9 @@ def main():
                         elif folder.startswith("./"):
                             # current directory
                             folder = f"{current_folder}/{folder[2:]}"
+                    else:
+                        if folder == "~":
+                            folder = home_folder
                     os.chdir(folder)
                     folders.append(folder)
                 except FileNotFoundError:
