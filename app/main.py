@@ -17,6 +17,7 @@ def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
     #  print("Logs from your program will appear here!")
     path = os.getenv('PATH')
+    available_commands = ["echo", "exit", "type", "cd", "pwd"]
 
 
     sys.stdout.write("$ ")
@@ -32,7 +33,7 @@ def main():
         if command == "type":
             if len(rest) == 1:
                 arg = rest[0]
-                if arg in ["echo", "exit", "type"]:
+                if arg in available_commands:
                     print(f"{arg} is a shell builtin")
                 else:
                     binary_folder = binary_exists(path, arg)
