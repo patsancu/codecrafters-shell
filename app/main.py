@@ -56,7 +56,7 @@ def main():
                 os.chdir(folder)
                 folders.append(folder)
             except FileNotFoundError:
-                print(f"cd: {folder}: No such file or directory ")
+                print(f"{folder}: No such file or directory")
         else:
             folder = binary_exists(path, command)
             if folder:
