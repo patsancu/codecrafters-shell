@@ -13,20 +13,22 @@ def main():
         exit_code = 0
         input_text = input()
         splitted = input_text.split()
-        if input_text.startswith("exit"):
-            if len(splitted) > 1:
-                arg = splitted[1]
-                if arg != "0":
-                    print("Argument wasn't 0!")
-                    exit_code = 1
+        current_command = ""
+        command, *rest = input_text.split()
+        if command == "type":
+            if len(rest) == 1:
+                arg = rest[0]
+                if arg in ["echo", "exit", "type"]:
+                    print(f"{arg} is a shell builtin")
+                else:
+                    print(f"{arg} not found")
+        elif command == "echo":
+            print(rest)
+        elif command == "exit":
+            if len(rest) == 1 and rest[0] == "0":
+                break
             else:
-                exit_code = 2
-                print("No arguments for exit")
-            break
-        elif input_text.startswith("echo"):
-            if len(splitted) > 1:
-                args = " ".join(splitted[1:])
-                print(args)
+                print("Exit should be used as: exit 0")
         else:
             print(f"{input_text}: not found")
         sys.stdout.write("$ ")
